@@ -1,3 +1,28 @@
 spring:
   application:
     name: tienda-moda-API
+
+  spring:
+    datasource:
+      url:
+        jdbc:
+          h2:
+            file: ~/tiendadb
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+    jpa:
+      hibernate:
+        ddl-auto: update
+      spring:
+        jpa:
+          show-sql: true
+      database-platform:
+        org:
+          hibernate:
+            dialect: H2Dialect
+
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
