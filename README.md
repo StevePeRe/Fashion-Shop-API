@@ -17,7 +17,7 @@ API REST para tienda de moda con **arquitectura hexagonal** y patrones avanzados
 - ✅ **CQRS** (Commands vs Queries separadas)
 - ✅ **Mediator Pattern** (Handlers desacoplados)
 - ✅ **MapStruct** (Mappers type-safe)
-- ✅ **Spring Boot 3.x** + JPA/Hibernate
+- ✅ **Spring Boot 4.0.2**
 
 **Tecnologías principales**
 - Spring Boot 4.0.2 - Framework principal
