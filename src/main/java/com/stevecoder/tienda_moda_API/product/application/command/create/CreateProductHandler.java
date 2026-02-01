@@ -1,4 +1,4 @@
-package com.stevecoder.tienda_moda_API.product.application;
+package com.stevecoder.tienda_moda_API.product.application.command.create;
 
 import com.stevecoder.tienda_moda_API.common.mediator.RequestHandler;
 import com.stevecoder.tienda_moda_API.product.domain.Product;
@@ -6,14 +6,18 @@ import com.stevecoder.tienda_moda_API.product.domain.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service // o componente
+@Service // o componente. El servicio se transforma en Handle y Request
 @RequiredArgsConstructor
-public class ProductCreateHandler implements RequestHandler<ProductCreateRequest, Void> {
+public class CreateProductHandler implements RequestHandler<CreateProductRequest, Void> {
 
     private final ProductRepository productRepository;
 
+    // En este caso creo el producto pasado de productDTO -> CreateProductRequest -> Product. Y se lo paso
+    // al repositorio.
     @Override
-    public Void handle(ProductCreateRequest request) {
+    public Void handle(CreateProductRequest request) {
+
+        // podria crear un mapper para evitar hacer la build, lo hace mas corto
         Product product = Product.builder()
                 .name(request.getName())
                 .id(request.getId())
@@ -31,7 +35,7 @@ public class ProductCreateHandler implements RequestHandler<ProductCreateRequest
     }
 
     @Override
-    public Class<ProductCreateRequest> getRequestType() {
-        return ProductCreateRequest.class;
+    public Class<CreateProductRequest> getRequestType() {
+        return CreateProductRequest.class;
     }
 }

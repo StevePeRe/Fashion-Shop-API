@@ -19,7 +19,7 @@ public class Mediator {
     }
 
     public <R, T extends Request<R>> R dispatch(T request) {
-        RequestHandler<T, R> handler = (RequestHandler<T, R>) requestHandlerMap.get(request.getClass());
+        RequestHandler<T, R> handler = (RequestHandler<T, R>) requestHandlerMap.get(request.getClass()); // llega la request que necesitemos (crear, update,obtener datos, etc)
         if (handler == null) {
 //            log.error("No handler found for request type: {}", request.getClass());
             throw new RuntimeException("No handler found for request type: " + request.getClass());

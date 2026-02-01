@@ -1,18 +1,12 @@
-package com.stevecoder.tienda_moda_API.product.domain;
+package com.stevecoder.tienda_moda_API.product.infrastructure.database.entity;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
-//@Entity
-@Builder
 @Data
-//@Table(name = "products")
-public class Product {
+public class ProductEntity {
 
-    //    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

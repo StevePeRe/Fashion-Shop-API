@@ -1,15 +1,12 @@
-package com.stevecoder.tienda_moda_API.product.application;
+package com.stevecoder.tienda_moda_API.product.application.command.create;
 
 import com.stevecoder.tienda_moda_API.common.mediator.Request;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
 
-import java.awt.*;
 import java.math.BigDecimal;
 
-@RequiredArgsConstructor
-@Getter
-public class ProductCreateRequest implements Request<Void> {
+@Data
+public class CreateProductRequest implements Request<Void> {
 
     private Long id;
 
@@ -19,6 +16,6 @@ public class ProductCreateRequest implements Request<Void> {
     private Integer stockQuantity;
     private String category;
     private String size;
-    private Color color;
-    
+    private String color;
+
 }

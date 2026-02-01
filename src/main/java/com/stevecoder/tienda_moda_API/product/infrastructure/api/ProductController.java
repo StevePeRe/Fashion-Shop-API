@@ -1,9 +1,16 @@
 package com.stevecoder.tienda_moda_API.product.infrastructure.api;
 
 import com.stevecoder.tienda_moda_API.common.mediator.Mediator;
-import com.stevecoder.tienda_moda_API.product.domain.Product;
+import com.stevecoder.tienda_moda_API.product.application.query.getById.GetProductByIdRequest;
+import com.stevecoder.tienda_moda_API.product.application.query.getById.GetProductByIdResponse;
+import com.stevecoder.tienda_moda_API.product.infrastructure.api.dto.ProductDTO;
+import com.stevecoder.tienda_moda_API.product.infrastructure.api.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -12,28 +19,40 @@ public class ProductController implements ProductApi {
 
     private final Mediator mediator;
 
-    @GetMapping
-    public String getProduct() {
-        return "Retorno todos los productos";
-    }
-
-    @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) {
-        return null;
-    }
+    private final ProductMapper productMapper;
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return null;
+    public ResponseEntity<Void> createProduct(@RequestBody ProductDTO productDTO) {
+        // el productDTO lo pasa a CreateProductRequest al dispatch, que a partir de la clase llama al metodo handle de la misma
+        // para hacer lo que la clase requiera
+        // Hago el mapp por pasar productDTO (un objeto completo) a otro tipo de dato
+        mediator.dispatch(productMapper.mapToCreateProductRequest(productDTO));
+        return ResponseEntity.created(URI.create("/api/products".concat(productDTO.getId().toString()))).build();
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        return null;
+    public ResponseEntity<Void> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        // no hace falta realizar un map por la simplicidad de crear la request por el Id pasado
+        GetProductByIdResponse response = mediator.dispatch(new GetProductByIdRequest(id));
+
+        ProductDTO productDTO = productMapper.mapToProductDTO(response.getProduct());
         
+        return ResponseEntity.ok(productDTO);
+    }
+
+    @Override
+    public ResponseEntity<List<ProductDTO>> getAllProducts(@RequestParam(required = false) String pageSize) {
+        return ResponseEntity.ok(null);
     }
 }

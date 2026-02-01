@@ -2,182 +2,59 @@ package com.stevecoder.tienda_moda_API.product.infrastructure.database;
 
 import com.stevecoder.tienda_moda_API.product.domain.Product;
 import com.stevecoder.tienda_moda_API.product.domain.ProductRepository;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
+import com.stevecoder.tienda_moda_API.product.infrastructure.database.entity.ProductEntity;
+import com.stevecoder.tienda_moda_API.product.infrastructure.database.mapper.ProductEntityMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 @Repository
+@RequiredArgsConstructor
 public class ProductRepositoryImpl implements ProductRepository {
-     
+
+    private final List<ProductEntity> products = new ArrayList<>(); // bases de datos momentanea
+    private final ProductEntityMapper productEntityMapper;
+
     @Override
     public void upsert(Product product) {
-
+        products.add(productEntityMapper.mapToProductEntity(product));
     }
 
     @Override
-    public List<Product> findByCategory(String category) {
-        return List.of();
-    }
-
-    @Override
-    public List<Product> findByNameContainingIgnoreCase(String name) {
-        return List.of();
-    }
-
-    @Override
-    public void flush() {
-
-    }
-
-    @Override
-    public <S extends Product> S saveAndFlush(S entity) {
-        return null;
-    }
-
-    @Override
-    public <S extends Product> List<S> saveAllAndFlush(Iterable<S> entities) {
-        return List.of();
-    }
-
-    @Override
-    public void deleteAllInBatch(Iterable<Product> entities) {
-
-    }
-
-    @Override
-    public void deleteAllByIdInBatch(Iterable<Long> longs) {
-
-    }
-
-    @Override
-    public void deleteAllInBatch() {
-
-    }
-
-    @Override
-    public Product getOne(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public Product getById(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public Product getReferenceById(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public <S extends Product> Optional<S> findOne(Example<S> example) {
-        return Optional.empty();
-    }
-
-    @Override
-    public <S extends Product> List<S> findAll(Example<S> example) {
-        return List.of();
-    }
-
-    @Override
-    public <S extends Product> List<S> findAll(Example<S> example, Sort sort) {
-        return List.of();
-    }
-
-    @Override
-    public <S extends Product> Page<S> findAll(Example<S> example, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public <S extends Product> long count(Example<S> example) {
-        return 0;
-    }
-
-    @Override
-    public <S extends Product> boolean exists(Example<S> example) {
-        return false;
-    }
-
-    @Override
-    public <S extends Product, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
-        return null;
-    }
-
-    @Override
-    public <S extends Product> S save(S entity) {
-        return null;
-    }
-
-    @Override
-    public <S extends Product> List<S> saveAll(Iterable<S> entities) {
-        return List.of();
-    }
-
-    @Override
-    public Optional<Product> findById(Long aLong) {
-        return Optional.empty();
-    }
-
-    @Override
-    public boolean existsById(Long aLong) {
-        return false;
+    public Optional<Product> findById(Long id) {
+        return products.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst()
+                .map(productEntityMapper::mapToProduct); // le aplico el metodo por referencia al elemento encontrado
     }
 
     @Override
     public List<Product> findAll() {
-        return List.of();
+        return products.stream()
+                .map(productEntityMapper::mapToProduct)
+                .toList();
     }
 
     @Override
-    public List<Product> findAllById(Iterable<Long> longs) {
-        return List.of();
+    public void deleteById(Long id) {
+        products.removeIf(p -> p.getId().equals(id));
     }
 
-    @Override
-    public long count() {
-        return 0;
-    }
 
-    @Override
-    public void deleteById(Long aLong) {
+//    @Override
+//    public List<Product> findByCategory(String category) {
+//
+//        products.stream()
+//                .filter(p->p.getCategory().equals(category))
+//                .findFirst()
+//                .map(productEntityMapper::mapToProduct);
+//       ProductEntity productEntity = productEntityMapper.mapToProductEntity();
+//
+//        return List.of();
+//    }
 
-    }
 
-    @Override
-    public void delete(Product entity) {
-
-    }
-
-    @Override
-    public void deleteAllById(Iterable<? extends Long> longs) {
-
-    }
-
-    @Override
-    public void deleteAll(Iterable<? extends Product> entities) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
-
-    @Override
-    public List<Product> findAll(Sort sort) {
-        return List.of();
-    }
-
-    @Override
-    public Page<Product> findAll(Pageable pageable) {
-        return null;
-    }
 }

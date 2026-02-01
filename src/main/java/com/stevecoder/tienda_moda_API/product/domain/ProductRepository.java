@@ -1,17 +1,21 @@
 package com.stevecoder.tienda_moda_API.product.domain;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
+import java.util.Optional;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository {
 
 //    Optional<Product> findById(Long id); ya esta en JPA
 
     void upsert(Product product);
 
-    List<Product> findByCategory(String category);
+    Optional<Product> findById(Long id);
 
-    List<Product> findByNameContainingIgnoreCase(String name);
+    List<Product> findAll();
+
+    void deleteById(Long id);
+
+//    List<ProductEntity> findByCategory(String category);
+
 
 }
