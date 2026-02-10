@@ -1,7 +1,7 @@
 package com.stevecoder.tienda_moda_API.product.infrastructure.database;
 
-import com.stevecoder.tienda_moda_API.product.domain.Product;
-import com.stevecoder.tienda_moda_API.product.domain.ProductRepository;
+import com.stevecoder.tienda_moda_API.product.domain.entity.Product;
+import com.stevecoder.tienda_moda_API.product.domain.port.ProductRepository;
 import com.stevecoder.tienda_moda_API.product.infrastructure.database.entity.ProductEntity;
 import com.stevecoder.tienda_moda_API.product.infrastructure.database.mapper.ProductEntityMapper;
 import lombok.RequiredArgsConstructor;

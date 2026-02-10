@@ -1,6 +1,6 @@
 package com.stevecoder.tienda_moda_API.product.application.query.getById;
 
-import com.stevecoder.tienda_moda_API.product.domain.Product;
+import com.stevecoder.tienda_moda_API.product.domain.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

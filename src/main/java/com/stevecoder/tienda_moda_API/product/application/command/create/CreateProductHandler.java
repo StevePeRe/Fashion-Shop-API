@@ -1,8 +1,8 @@
 package com.stevecoder.tienda_moda_API.product.application.command.create;
 
 import com.stevecoder.tienda_moda_API.common.mediator.RequestHandler;
-import com.stevecoder.tienda_moda_API.product.domain.Product;
-import com.stevecoder.tienda_moda_API.product.domain.ProductRepository;
+import com.stevecoder.tienda_moda_API.product.domain.entity.Product;
+import com.stevecoder.tienda_moda_API.product.domain.port.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

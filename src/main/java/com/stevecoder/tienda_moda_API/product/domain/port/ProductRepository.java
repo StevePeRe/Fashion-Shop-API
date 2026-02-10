@@ -1,4 +1,6 @@
-package com.stevecoder.tienda_moda_API.product.domain;
+package com.stevecoder.tienda_moda_API.product.domain.port;
+
+import com.stevecoder.tienda_moda_API.product.domain.entity.Product;
 
 import java.util.List;
 import java.util.Optional;

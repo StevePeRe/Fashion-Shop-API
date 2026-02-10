@@ -1,4 +1,4 @@
-package com.stevecoder.tienda_moda_API.product.domain;
+package com.stevecoder.tienda_moda_API.product.domain.entity;
 
 import lombok.Builder;
 import lombok.Data;

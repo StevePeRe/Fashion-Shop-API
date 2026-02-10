@@ -5,6 +5,7 @@ import com.stevecoder.tienda_moda_API.product.application.query.getById.GetProdu
 import com.stevecoder.tienda_moda_API.product.application.query.getById.GetProductByIdResponse;
 import com.stevecoder.tienda_moda_API.product.infrastructure.api.dto.ProductDTO;
 import com.stevecoder.tienda_moda_API.product.infrastructure.api.mapper.ProductMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class ProductController implements ProductApi {
     private final ProductMapper productMapper;
 
     @PostMapping
-    public ResponseEntity<Void> createProduct(@RequestBody ProductDTO productDTO) {
+    public ResponseEntity<Void> createProduct(@RequestBody @Valid ProductDTO productDTO) {
         // el productDTO lo pasa a CreateProductRequest al dispatch, que a partir de la clase llama al metodo handle de la misma
         // para hacer lo que la clase requiera
         // Hago el mapp por pasar productDTO (un objeto completo) a otro tipo de dato
@@ -31,7 +32,7 @@ public class ProductController implements ProductApi {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<Void> updateProduct(@PathVariable @Valid Long id, @RequestBody ProductDTO productDTO) {
 
         return ResponseEntity.noContent().build();
     }
@@ -47,7 +48,7 @@ public class ProductController implements ProductApi {
         GetProductByIdResponse response = mediator.dispatch(new GetProductByIdRequest(id));
 
         ProductDTO productDTO = productMapper.mapToProductDTO(response.getProduct());
-        
+
         return ResponseEntity.ok(productDTO);
     }
 

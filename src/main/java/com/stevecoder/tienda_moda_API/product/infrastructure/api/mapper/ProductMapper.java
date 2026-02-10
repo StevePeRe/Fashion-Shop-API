@@ -1,7 +1,7 @@
 package com.stevecoder.tienda_moda_API.product.infrastructure.api.mapper;
 
 import com.stevecoder.tienda_moda_API.product.application.command.create.CreateProductRequest;
-import com.stevecoder.tienda_moda_API.product.domain.Product;
+import com.stevecoder.tienda_moda_API.product.domain.entity.Product;
 import com.stevecoder.tienda_moda_API.product.infrastructure.api.dto.ProductDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

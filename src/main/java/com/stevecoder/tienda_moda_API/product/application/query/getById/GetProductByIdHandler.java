@@ -1,8 +1,9 @@
 package com.stevecoder.tienda_moda_API.product.application.query.getById;
 
 import com.stevecoder.tienda_moda_API.common.mediator.RequestHandler;
-import com.stevecoder.tienda_moda_API.product.domain.Product;
-import com.stevecoder.tienda_moda_API.product.domain.ProductRepository;
+import com.stevecoder.tienda_moda_API.product.domain.entity.Product;
+import com.stevecoder.tienda_moda_API.product.domain.exception.ProductNotFoundException;
+import com.stevecoder.tienda_moda_API.product.domain.port.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class GetProductByIdHandler implements RequestHandler<GetProductByIdReque
     @Override
     public GetProductByIdResponse handle(GetProductByIdRequest request) {
 
-        Product product = productRepository.findById(request.getId()).orElseThrow(() -> new IllegalArgumentException("Product not found"));
+        Product product = productRepository.findById(request.getId()).orElseThrow(() -> new ProductNotFoundException(request.getId()));
 
         return new GetProductByIdResponse(product);
     }
