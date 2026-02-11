@@ -27,6 +27,7 @@ public class Mediator {
         return handler.handle(request);
     }
 
+    // Crea otro hilo para manejarlo sin que el usuario tenga que esperar demasiado tiempo
     @Async
     public <R, T extends Request<R>> void dispatchAsync(T request) {
         this.dispatch(request);
