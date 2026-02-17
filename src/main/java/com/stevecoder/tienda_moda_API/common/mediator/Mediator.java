@@ -32,6 +32,4 @@ public class Mediator {
     public <R, T extends Request<R>> void dispatchAsync(T request) {
         this.dispatch(request);
     }
-
-
 }

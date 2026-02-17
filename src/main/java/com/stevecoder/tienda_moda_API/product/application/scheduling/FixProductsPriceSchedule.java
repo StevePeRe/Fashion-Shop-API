@@ -15,7 +15,7 @@ public class FixProductsPriceSchedule {
 
     private final ProductRepository productRepository;
 
-    @Scheduled(fixedRate = 600000)
+    @Scheduled(fixedRate = 60000)
     public void fixProductsPrice() {
 
         log.info("Arreglando precio de productos");

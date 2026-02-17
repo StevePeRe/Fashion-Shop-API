@@ -5,6 +5,8 @@ import com.stevecoder.tienda_moda_API.product.domain.port.ProductRepository;
 import com.stevecoder.tienda_moda_API.product.infrastructure.database.entity.ProductEntity;
 import com.stevecoder.tienda_moda_API.product.infrastructure.database.mapper.ProductEntityMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class ProductRepositoryImpl implements ProductRepository {
 
     private final List<ProductEntity> products = new ArrayList<>(); // bases de datos momentanea
@@ -20,11 +23,16 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void upsert(Product product) {
-        products.add(productEntityMapper.mapToProductEntity(product));
+        ProductEntity productEntity = productEntityMapper.mapToProductEntity(product);
+
+        products.removeIf(p -> p.getId().equals(productEntity.getId()));
+        products.add(productEntity);
     }
 
+    @Cacheable(value = "products", key = "#id")
     @Override
     public Optional<Product> findById(Long id) {
+        log.info("Finding product with id {}", id);
         return products.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst()
