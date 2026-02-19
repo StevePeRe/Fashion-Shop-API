@@ -57,13 +57,33 @@ API REST para tienda de moda con **arquitectura hexagonal** y patrones avanzados
 
 ## 📝 Requisitos Previos
 - Java 21 JDK
-- Maven 3.6+
+- Maven 3.6+ (o usar el wrapper incluido)
+- Docker (opcional)
 
 ## 🖥️ Despliegue
+  **Clonación**
 ```
 git clone https://github.com/StevePeRe/Fashion-Shop-API.git
 cd Fashion-Shop-API
+```
+  **Ejecución Local**
+```
+# Usando Maven Wrapper
 ./mvnw spring-boot:run
+
+# O usando Maven instalado
+mvn spring-boot:run
+```
+  **Ejecución con Docker**
+  ```
+# Construir imagen
+docker build -t spring-boot-web-app .
+
+# Ejecutar contenedor
+docker run -p 8080:8080 spring-boot-web-app
+
+# O usando Docker Compose
+docker-compose up
 ```
 
 ## 📄 Documentación Swagger
