@@ -35,6 +35,9 @@ API REST para tienda de moda con **arquitectura hexagonal** y patrones avanzados
 - *MapStruct 1.6.3* - Mapeo automático entre DTOs y entidades
 - *lombok-mapstruct-binding 0.2.0* - Integración entre Lombok y MapStruct
 
+**Documentación API**
+- SpringDoc OpenAPI 2.8.6 - Generación automática de documentación Swagger/OpenAPI
+
 ## 🚀 Características principales
 
 - **Create, Read, Update, Delete** productos completos
@@ -52,14 +55,19 @@ API REST para tienda de moda con **arquitectura hexagonal** y patrones avanzados
 - [ ] Testing unitario/integration completo
 - [ ] Documentación OpenAPI/Swagger
 
-## Requisitos Previos
+## 📝 Requisitos Previos
 - Java 21 JDK
 - Maven 3.6+
 
-## Pruebas
-- Postman -> URL: http://localhost:8080/api/products - Métodos GET, POST, DELETE
+## 🖥️ Despliegue
 ```
 git clone https://github.com/StevePeRe/Fashion-Shop-API.git
 cd Fashion-Shop-API
 ./mvnw spring-boot:run
 ```
+
+## 📄 Documentación Swagger
+- URL: http://localhost:8080/swagger-ui.html
+- Especificación OpenAPI: http://localhost:8080/v3/api-docs
+  
+
